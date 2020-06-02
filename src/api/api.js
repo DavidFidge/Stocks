@@ -1,25 +1,38 @@
 export function httpGet(path) {
-  return req(path)
+  return getRequest(path)
 }
 
 export function httpPost(path, data) {
-  return req(path, 'POST', data)
+  return postPutRequest(path, 'POST', data)
 }
 
 export function httpPut(path, data) {
-  return req(path, 'PUT', data)
+  return postPutRequest(path, 'PUT', data)
 }
 
 const apiUrl = 'https://localhost:5001'
 
-async function req(path, method = 'GET', data) {
+async function getRequest(path) {
+   
   const res = await fetch(apiUrl + path, {
-    method,
+    method: 'GET',
     headers: {
       'Origin': 'http://localhost:5000'
-    },
-    body: data && JSON.stringify(data)
+    }
   })
   const json = await res.json()
   return { ok: res.ok, data: json }
 }
+
+async function postPutRequest(path, method, data) {
+    const res = await fetch(apiUrl + path, {
+      method,
+      headers: {
+        'Origin': 'http://localhost:5000'
+      },
+      body: data && JSON.stringify(data)
+    })
+    const json = await res.json()
+    return { ok: res.ok, data: json }
+  }
+  
