@@ -2,7 +2,7 @@ import { httpGet } from './api.js'
 
 export class EndOfDayApi
 {
-    getEndOfDay() {
-        return httpGet("/endOfDay");
+    getEndOfDay(filterText) {
+        return httpGet(`/endofday?$filter=Stock/Code eq '${filterText}'`);
     }
 }
