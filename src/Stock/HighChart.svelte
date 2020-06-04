@@ -1,3 +1,25 @@
+<svelte:head>
+
+    <link rel="stylesheet" type="text/css" href="https://code.highcharts.com/css/stocktools/gui.css">
+    <link rel="stylesheet" type="text/css" href="https://code.highcharts.com/css/annotations/popup.css">
+    
+    <!-- scripts are difficult to load non-server side
+        Ideas: https://github.com/sveltejs/svelte/issues/3798, https://gist.github.com/andrewarchi/6aae8d8295d4bcf9c89c4150e33be3a9
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+
+    <script src="https://code.highcharts.com/stock/indicators/indicators-all.js"></script>
+    <script src="https://code.highcharts.com/modules/drag-panes.js"></script>
+
+    <script src="https://code.highcharts.com/modules/annotations-advanced.js"></script>
+    <script src="https://code.highcharts.com/modules/price-indicator.js"></script>
+    <script src="https://code.highcharts.com/modules/full-screen.js"></script>
+
+    <script src="https://code.highcharts.com/modules/stock-tools.js"></script>
+    -->
+
+</svelte:head>
+
 <script>
     import { onMount } from 'svelte';
 
