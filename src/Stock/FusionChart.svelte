@@ -2,7 +2,7 @@
     export let endOfDayData;
 
     $:{
-        if (endOfDayData)
+        if (endOfDayData && endOfDayData.length > 0)
         {
             window.$.each(endOfDayData, function(i, item) {
                 item.x = i + 1;

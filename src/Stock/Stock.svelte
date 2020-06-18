@@ -15,7 +15,7 @@
         let mappedData = window.$.map(stockData, function (v) {
             return {
             value: v.code,
-            label: v.code.concat(' - ', v.description)
+            label: v.code.concat(' - ', v.companyName)
             }
         });
 
