@@ -24,6 +24,10 @@ a:visited {
 	color: rgb(0,80,160);
 }
 
+a.btn:visited {
+	color: #fff;
+}
+
 label {
 	display: block;
 }
