@@ -1,6 +1,6 @@
 <script>
     import { links } from 'svelte-routing'
-    export let to
+    export let to = ""
 </script>
 
 <style>
