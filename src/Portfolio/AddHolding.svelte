@@ -32,6 +32,7 @@
 <style>
     .formContainer {
         padding: 10px 0px 10px 0px;
+        max-width: 500px;
     }
 </style>
 
@@ -42,8 +43,8 @@
         <TextInput label="Company Code" bind:value={companyCode} />
         <DateInput label="Purchase Date" bind:value={purchaseDate} />
         <NumberInput label="Number of Shares" bind:value={numberOfShares} />
-        <MoneyInput label="Total Purchase Price" bind:value={purchasePrice} shadowLabel={pricePerShare} />
-        <MoneyInput label="Brokerage" bind:value={brokerage} />
+        <MoneyInput prependLabel="$" label="Total Purchase Price" bind:value={purchasePrice} appendLabel={pricePerShare} />
+        <MoneyInput prependLabel="$" label="Brokerage" bind:value={brokerage} />
         <div>
             <Button>Save</Button>
         </div>
