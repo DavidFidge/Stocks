@@ -17,7 +17,8 @@ async function getRequest(path) {
   const res = await fetch(apiUrl + path, {
     method: 'GET',
     headers: {
-      'Origin': 'http://localhost:5000'
+      'Origin': 'http://localhost:5000',
+      'Content-Type': 'application/json'
     }
   })
   const json = await res.json()
@@ -28,7 +29,8 @@ async function postPutRequest(path, method, data) {
     const res = await fetch(apiUrl + path, {
       method,
       headers: {
-        'Origin': 'http://localhost:5000'
+        'Origin': 'http://localhost:5000',
+        'Content-Type': 'application/json'
       },
       body: data && JSON.stringify(data)
     })
