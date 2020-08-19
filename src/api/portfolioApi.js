@@ -7,10 +7,14 @@ export class PortfolioApi
     }
 
     addHolding(holding) {
-        return httpGet(`/api/Holding`, holding);
+        return httpPost(`/api/Holding`, holding);
     }
 
     getPortfolios() {
         return httpGet(`/api/Portfolio/Portfolios`);
+    }
+
+    getHoldings() {
+        return httpGet(`/api/Holding/Holdings`);
     }
 }

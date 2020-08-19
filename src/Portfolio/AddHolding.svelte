@@ -1,22 +1,59 @@
 <script>
-    
+    import { navigate } from "svelte-routing";
     import { PortfolioApi } from '../api/portfolioApi.js'
+    import { StockApi } from '../api/stockApi.js'
+    import { onMount } from "svelte";
     import TextInput from "../Components/TextInput.svelte";
     import MoneyInput from "../Components/MoneyInput.svelte";
     import DateInput from "../Components/DateInput.svelte";
     import NumberInput from "../Components/NumberInput.svelte";
     import Button from "../Components/Button.svelte";
+    import Select from 'svelte-select';
 
     const portfolioApi = new PortfolioApi();
+    const stockApi = new StockApi();
 
-    let companyCode = "";
+    let stock = undefined;
+    let portfolio = undefined;
     let purchaseDate = "";
     let numberOfShares = "";
     let purchasePrice = "";
     let pricePerShare = "Price Per Share: 0.00";
     let brokerage = "";
-
+    let portfolios = [];
     let holding = {};
+
+    let portfolioInputAttributes = { id: "Portfolio" };
+    let stockCodeInputAttributes = { id: "StockCode" };
+
+    async function getPortfolios()
+    {
+        return await portfolioApi.getPortfolios();
+    }
+
+    const loadOptions = async function(filteredText) {
+        let stockData = (await stockApi.getStocks(filteredText)).data;
+        
+        let mappedData = window.$.map(stockData, function (v) {
+            return {
+            value: v.code,
+            label: v.code.concat(' - ', v.companyName)
+            }
+        });
+
+        return mappedData;
+    };
+
+    onMount(async _ => {
+        const { data } = await getPortfolios();
+
+        portfolios = window.$.map(data, function (v) {
+            return {
+            value: v.id,
+            label: v.name
+            }
+        });
+    });
 
     $: { 
         if (window.$.isNumeric(purchasePrice) && window.$.isNumeric(numberOfShares))
@@ -29,9 +66,10 @@
         }
     }
 
-    $: { holding = { companyCode, purchaseDate, numberOfShares, purchasePrice, brokerage } }
+    $: { holding = { stockCode: stock?.value, purchaseDate, numberOfShares, purchasePrice, brokerage, portfolioId: portfolio?.value } }
 
     async function handleSubmit(event) {
+
         const { ok } = await portfolioApi.addHolding(holding);
         
         if (ok) {
@@ -52,13 +90,14 @@
 
 <div class="formContainer">
     <form on:submit|preventDefault={handleSubmit}>
-        <TextInput label="Company Code" bind:value={companyCode} />
+        <label for="StockCode">Stock Code</label>
+        <Select inputAttributes={stockCodeInputAttributes} containerClasses="input-group mb-3" {loadOptions} placeholder="Asx code or company name" listPlacement="bottom" bind:selectedValue={stock}></Select>
         <DateInput label="Purchase Date" bind:value={purchaseDate} />
         <NumberInput label="Number of Shares" bind:value={numberOfShares} />
         <MoneyInput prependLabel="$" label="Total Purchase Price" bind:value={purchasePrice} appendLabel={pricePerShare} />
         <MoneyInput prependLabel="$" label="Brokerage" bind:value={brokerage} />
-        <div>
-            <Button>Save</Button>
-        </div>
+        <label for="Portfolio">Portfolio</label>
+        <Select inputAttributes={portfolioInputAttributes} containerClasses="input-group mb-3" items={portfolios} listPlacement="bottom" bind:selectedValue={portfolio}></Select>
+        <Button>Save</Button>
     </form>
 </div>

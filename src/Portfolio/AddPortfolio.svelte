@@ -1,5 +1,5 @@
 <script>
-
+    import { navigate } from "svelte-routing";
     import { PortfolioApi } from '../api/portfolioApi.js'
     import TextInput from "../Components/TextInput.svelte";
     import Button from "../Components/Button.svelte";

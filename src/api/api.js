@@ -34,7 +34,7 @@ async function postPutRequest(path, method, data) {
       },
       body: data && JSON.stringify(data)
     })
-    const json = await res.json()
-    return { ok: res.ok, data: json }
+
+    return { ok: res.ok }
   }
   
