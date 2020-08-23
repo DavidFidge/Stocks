@@ -6,37 +6,82 @@
 
     const portfolioApi = new PortfolioApi();
 
-    let portfolios = {};
-    let holdings = {};
-
-    async function getPortfolios()
-    {
-        return await portfolioApi.getPortfolios();
-    }
-
-    async function getHoldings()
-    {
-        return await portfolioApi.getHoldings();
-    }
-
     onMount(async _ => {
-        let data = await getPortfolios();
-        portfolios = JSON.stringify(data.data);
 
-        data = await getHoldings();
-        holdings = JSON.stringify(data.data);
+        let portfolioUrl = portfolioApi.getPortfoliosUrl();
+
+        window.$("#portfoliosGridContainer").dxDataGrid({
+            dataSource: portfolioUrl,
+            columns: [
+                "name",
+                {
+                    dataField: "holderIdentificationNumber",
+                    caption: "HIN"
+                }
+            ],
+            showBorders: true,
+            allowColumnResizing: true,
+            columnResizingMode: "nextColumn",
+            columnMinWidth: 50,
+            columnAutoWidth: true
+        });
+
+        let holdingsUrl = portfolioApi.getHoldingsUrl();
+
+        window.$("#holdingsGridContainer").dxDataGrid({
+            dataSource: holdingsUrl,
+            columns: [
+                "stockCode",
+                {
+                    dataField: "purchaseDate",
+                    dataType: "datetime",
+                    format: "dd/MM/y"
+                },
+                {
+                    dataField: "numberOfShares",
+                    caption: "No. of Shares"
+                },
+                {
+                    dataField: "purchasePrice",
+                    format: "#0.00##"
+                },
+                {
+                    dataField: "brokerage",
+                    format: "#0.00"
+                },
+                {
+                    dataField: "portfolioId",
+                    visible: false
+                },
+                {
+                    dataField: "Id",
+                    visible: false
+                }
+            ],
+            showBorders: true,
+            allowColumnResizing: true,
+            columnResizingMode: "nextColumn",
+            columnMinWidth: 50,
+            columnAutoWidth: true
+        });
     });
 
 </script>
 
 <h3>Portfolios</h3>
 
-<p>{portfolios}</p>
+<div class="mb-3" id="portfoliosGridContainer">
+</div>
 
-<Button to="/portfolio/addportfolio">Add Portfolio</Button>
+<div class="mb-3">
+    <Button to="/portfolio/addportfolio">Add Portfolio</Button>
+</div>
 
 <h3>Holdings</h3>
 
-<p>{holdings}</p>
+<div class="mb-3" id="holdingsGridContainer">
+</div>
 
-<Button to="/portfolio/addholding">Add Holding</Button>
+<div class="mb-3">
+    <Button to="/portfolio/addholding">Add Holding</Button>
+</div>

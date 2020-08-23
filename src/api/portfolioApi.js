@@ -1,4 +1,4 @@
-import { httpGet, httpPost } from './api.js'
+import { httpGet, httpPost, getApiUrl } from './api.js'
 
 export class PortfolioApi
 {
@@ -17,4 +17,12 @@ export class PortfolioApi
     getHoldings() {
         return httpGet(`/api/Holding/Holdings`);
     }
+
+    getHoldingsUrl() {
+        return getApiUrl() + `/api/Holding/Holdings`;
+    }
+
+    getPortfoliosUrl() {
+        return getApiUrl() + `/api/Portfolio/Portfolios`;
+    }    
 }

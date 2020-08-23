@@ -10,6 +10,10 @@ export function httpPut(path, data) {
   return postPutRequest(path, 'PUT', data)
 }
 
+export function getApiUrl() {
+  return apiUrl;
+}
+
 const apiUrl = 'https://localhost:5001'
 
 async function getRequest(path) {

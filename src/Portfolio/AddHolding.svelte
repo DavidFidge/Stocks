@@ -66,7 +66,22 @@
         }
     }
 
-    $: { holding = { stockCode: stock?.value, purchaseDate, numberOfShares, purchasePrice, brokerage, portfolioId: portfolio?.value } }
+    $: { 
+
+        let stockCode = null;
+        let portfolioId = null;
+
+        if (stock)
+        {
+            stockCode = stock.value;
+        }
+        if (portfolio)
+        {
+            portfolioId = portfolio.value;
+        }
+        
+        holding = { stockCode: stockCode, purchaseDate, numberOfShares, purchasePrice, brokerage, portfolioId: portfolioId }    
+    }
 
     async function handleSubmit(event) {
 

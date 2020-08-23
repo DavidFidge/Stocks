@@ -7,10 +7,11 @@
     const portfolioApi = new PortfolioApi();
 
     let name = "";
+    let holderIdentificationNumber = "";
 
     let portfolio = {};
 
-    $: { portfolio = { name } }
+    $: { portfolio = { name, holderIdentificationNumber } }
 
     async function handleSubmit(event) {
         const { ok } = await portfolioApi.addPortfolio(portfolio);
@@ -34,6 +35,7 @@
 <div class="formContainer">
     <form on:submit|preventDefault={handleSubmit}>
         <TextInput label="Name" bind:value={name} />
+        <TextInput label="Holder Identification Number (HIN)" bind:value={holderIdentificationNumber} />
         <div>
             <Button>Save</Button>
         </div>

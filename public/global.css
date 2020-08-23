@@ -14,3 +14,7 @@ nav.navbar {
 a.navbar-brand {
     font-size: 30px;
 }
+
+.dx-datagrid-headers {  
+    color: #000000 !important;  
+}
