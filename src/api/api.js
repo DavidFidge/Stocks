@@ -10,6 +10,10 @@ export function httpPut(path, data) {
   return postPutRequest(path, 'PUT', data)
 }
 
+export function getApiUrl() {
+  return apiUrl;
+}
+
 const apiUrl = 'https://localhost:5001'
 
 async function getRequest(path) {
@@ -17,7 +21,8 @@ async function getRequest(path) {
   const res = await fetch(apiUrl + path, {
     method: 'GET',
     headers: {
-      'Origin': 'http://localhost:5000'
+      'Origin': 'http://localhost:5000',
+      'Content-Type': 'application/json'
     }
   })
   const json = await res.json()
@@ -28,11 +33,12 @@ async function postPutRequest(path, method, data) {
     const res = await fetch(apiUrl + path, {
       method,
       headers: {
-        'Origin': 'http://localhost:5000'
+        'Origin': 'http://localhost:5000',
+        'Content-Type': 'application/json'
       },
       body: data && JSON.stringify(data)
     })
-    const json = await res.json()
-    return { ok: res.ok, data: json }
+
+    return { ok: res.ok }
   }
   

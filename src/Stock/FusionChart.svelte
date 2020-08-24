@@ -17,7 +17,7 @@
                 dataSource: {
                     chart: {
                         theme: "fusion",
-                        caption: `${endOfDayData[0].stock.code} Chart`,
+                        caption: `${endOfDayData[0].stockCode} Chart`,
                         subCaption: "Last 2 months",
                         numberprefix: "$",
                         vNumberPrefix: " ",

@@ -5,6 +5,7 @@
     import Stock from './Stock/Stock.svelte'
     import Portfolio from './Portfolio/Portfolio.svelte'
     import AddHolding from './Portfolio/AddHolding.svelte'
+    import AddPortfolio from './Portfolio/AddPortfolio.svelte'
     export let url = ""
 </script>
 
@@ -24,6 +25,9 @@
             <Route path="/portfolio/addholding">
                 <AddHolding />
             </Route>
+            <Route path="/portfolio/addportfolio">
+                <AddPortfolio />
+            </Route>           
         </div>
     </main>
 </Router>
