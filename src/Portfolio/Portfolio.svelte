@@ -13,7 +13,10 @@
         window.$("#portfoliosGridContainer").dxDataGrid({
             dataSource: portfolioUrl,
             columns: [
-                "name",
+                {
+                    dataField: "name",
+                    width: 200
+                },
                 {
                     dataField: "holderIdentificationNumber",
                     caption: "HIN"
