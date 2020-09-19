@@ -10,14 +10,23 @@
     let holderIdentificationNumber = "";
 
     let portfolio = {};
+    let errors = [];
 
     $: { portfolio = { name, holderIdentificationNumber } }
 
     async function handleSubmit(event) {
-        const { ok } = await portfolioApi.addPortfolio(portfolio);
+
+        let inputName = document.getElementById("Name");
+
+        let response = await portfolioApi.addPortfolio(portfolio);
         
-        if (ok) {
+        if (response.ok === true)
+        {
             navigate("/portfolio");
+        }
+        else
+        {
+            errors = response.response.errors;
         }
     }
 
@@ -33,9 +42,9 @@
 <h3>Add Portfolio</h3>
 
 <div class="formContainer">
-    <form on:submit|preventDefault={handleSubmit}>
-        <TextInput label="Name" bind:value={name} />
-        <TextInput label="Holder Identification Number (HIN)" bind:value={holderIdentificationNumber} />
+    <form novalidate on:submit|preventDefault={handleSubmit}>
+        <TextInput id="Name" label="Name" bind:value={name} {errors} />
+        <TextInput id="HolderIdentificationNumber" label="Holder Identification Number (HIN)" bind:value={holderIdentificationNumber} {errors} />
         <div>
             <Button>Save</Button>
         </div>

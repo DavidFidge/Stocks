@@ -4,6 +4,7 @@
     export let appendLabel = "";
     export let prependLabel = "";
     export let value;
+    export let required = false;
 
     if (!id)
     {
@@ -19,7 +20,7 @@
         <span class="input-group-text">{prependLabel}</span>
     </div>
 {/if}
-    <input {id} type="date" class="form-control" bind:value>
+    <input {id} required={required} type="date" class="form-control" bind:value>
 {#if appendLabel}
     <div class="input-group-append">
         <span class="input-group-text">{appendLabel}</span>
