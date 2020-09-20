@@ -12,17 +12,20 @@
 
     let checkValidity = function()
     {
+        let inputElement = document.getElementById(id);
+
         inputElement.setCustomValidity("");
+        errorMessages = [];
 
         if (!inputElement.validity.valid)
         {
             if (inputElement.validity.valueMissing)
             {
-                errorMessages.push(`${label} is required`);
+                errorMessages.push(`${label} is required.`);
             }
             else
             {
-                errorMessages.push(`Input errors`);
+                errorMessages.push(`Input errors.`);
             }
         }
     }
@@ -34,16 +37,23 @@ $: {
 
         if (inputElement)
         {
-            let errorMessagesForElement = errors[id];
+            if (errors)
+            {
+                let errorMessagesForElement = errors[id];
 
-            if (errorMessagesForElement)
-            { 
-                inputElement.setCustomValidity("Server errors");
-                errorMessages = errorMessagesForElement;
+                if (errorMessagesForElement)
+                { 
+                    inputElement.setCustomValidity("Server errors");
+                    errorMessages = errorMessagesForElement;
+                }
+                else
+                {
+                    checkValidity(inputElement);
+                }
             }
             else
-            {
-                checkValidity();
+            {                
+                checkValidity(inputElement);
             }
         }
     }
@@ -72,9 +82,24 @@ $: {
     </div>
 {/if}
 {#if multiline}
-    <textarea {id} required={required} class="form-control" bind:value />
+    <textarea
+        {id}
+        required={required}
+        class="form-control"
+        bind:value
+        on:change={checkValidity}
+	    on:input={checkValidity}
+    />
 {:else}
-    <input {id} required={required} class="form-control" type="text" bind:value />
+    <input 
+        {id} 
+        required={required}
+        class="form-control"
+        type="text"
+        bind:value 
+        on:change={checkValidity}
+	    on:input={checkValidity}
+    />
 {/if}
 {#if appendLabel}
     <div class="input-group-append">

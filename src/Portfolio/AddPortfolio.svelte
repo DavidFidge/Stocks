@@ -16,8 +16,6 @@
 
     async function handleSubmit(event) {
 
-        let inputName = document.getElementById("Name");
-
         let response = await portfolioApi.addPortfolio(portfolio);
         
         if (response.ok === true)
@@ -43,7 +41,7 @@
 
 <div class="formContainer">
     <form novalidate on:submit|preventDefault={handleSubmit}>
-        <TextInput id="Name" label="Name" bind:value={name} {errors} />
+        <TextInput id="Name" label="Name" bind:value={name} {errors} required={true} />
         <TextInput id="HolderIdentificationNumber" label="Holder Identification Number (HIN)" bind:value={holderIdentificationNumber} {errors} />
         <div>
             <Button>Save</Button>
