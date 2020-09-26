@@ -23,6 +23,7 @@
     let brokerage = "";
     let portfolios = [];
     let holding = {};
+    let errors = [];
 
     let portfolioInputAttributes = { id: "Portfolio", required: "true" };
     let stockCodeInputAttributes = { id: "StockCode", required: "true" };
@@ -93,10 +94,15 @@
 
     async function handleSubmit(event) {
 
-        const { ok } = await portfolioApi.addHolding(holding);
-        
-        if (ok) {
+        let response = await portfolioApi.addHolding(holding);
+
+        if (response.ok === true)
+        {
             navigate("/portfolio");
+        }
+        else
+        {
+            errors = response.response.errors;
         }
     }
 
@@ -115,10 +121,10 @@
     <form novalidate on:submit|preventDefault={handleSubmit}>
         <label for="StockCode">Stock Code</label>
         <Select inputAttributes={stockCodeInputAttributes} containerClasses="input-group mb-3" {loadOptions} placeholder="Asx code or company name" listPlacement="bottom" bind:selectedValue={stock}></Select>
-        <DateInput id="PurchaseDate" label="Purchase Date" bind:value={purchaseDate} required={true} />
-        <NumberInput id="NumberOfShares" label="Number of Shares" bind:value={numberOfShares} required={true} min={1} />
-        <MoneyInput id="PurchasePrice" prependLabel="$" label="Total Purchase Price" bind:value={purchasePrice} appendLabel={pricePerShare} required={true} />
-        <MoneyInput id="Brokerage" prependLabel="$" label="Brokerage" bind:value={brokerage} required={true} />
+        <DateInput id="PurchaseDate" label="Purchase Date" bind:value={purchaseDate} required={true} {errors} />
+        <NumberInput id="NumberOfShares" label="Number of Shares" bind:value={numberOfShares} required={true} min={1} {errors} />
+        <MoneyInput id="PurchasePrice" prependLabel="$" label="Total Purchase Price" bind:value={purchasePrice} appendLabel={pricePerShare} required={true} {errors} />
+        <MoneyInput id="Brokerage" prependLabel="$" label="Brokerage" bind:value={brokerage} required={true} {errors} />
         <label for="Portfolio">Portfolio</label>
         <Select inputAttributes={portfolioInputAttributes} containerClasses="input-group mb-3" items={portfolios} listPlacement="bottom" bind:selectedValue={portfolio}></Select>
         <Button>Save</Button>
