@@ -1,4 +1,6 @@
 <script>
+    import { updateValidationErrors, checkInputValidity } from '../api/validation.js'
+
     export let label;
     export let id;
     export let appendLabel = "";
@@ -12,51 +14,30 @@
 
     let checkValidity = function()
     {
-        let inputElement = document.getElementById(id);
+        let inputValidation = {
+            id: id,
+            label: label,
+            responseErrors: errors,
+            errorMessages: errorMessages
+        };
 
-        inputElement.setCustomValidity("");
-        errorMessages = [];
+        checkInputValidity(inputValidation);
 
-        if (!inputElement.validity.valid)
-        {
-            if (inputElement.validity.valueMissing)
-            {
-                errorMessages.push(`The ${label} field is required.`);
-            }
-            else
-            {
-                errorMessages.push(`Input errors.`);
-            }
-        }
+        errorMessages = inputValidation.errorMessages;
     }
 
 $: {
-    if (id)
-    {
-        let inputElement = document.getElementById(id);
+    let inputValidation = {
+            id: id,
+            label: label,
+            responseErrors: errors,
+            errorMessages: errorMessages
+        };
 
-        if (inputElement)
-        {
-            if (errors)
-            {
-                let errorMessagesForElement = errors[id];
+    updateValidationErrors(inputValidation);
 
-                if (errorMessagesForElement)
-                { 
-                    inputElement.setCustomValidity("Server errors");
-                    errorMessages = errorMessagesForElement;
-                }
-                else
-                {
-                    checkValidity(inputElement);
-                }
-            }
-            else
-            {                
-                checkValidity(inputElement);
-            }
-        }
-    }
+    errorMessages = inputValidation.errorMessages;
+    errors = [];
 }
 
 </script>

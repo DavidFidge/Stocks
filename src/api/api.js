@@ -39,7 +39,18 @@ async function postPutRequest(path, method, data) {
       body: data && JSON.stringify(data)
     })
 
-    const json = await res.json()
+    let tryGetJson = async (resp) => {
+      return new Promise((resolve) => {
+        if (resp) {
+          resp.json().then(json => resolve(json)).catch(() => resolve(null))
+        } else {
+          resolve(null)
+        }
+      })
+    }
+
+    const json = tryGetJson(res);
+
     return { ok: res.ok, response: json }
   }
   
