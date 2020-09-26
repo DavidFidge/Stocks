@@ -21,7 +21,7 @@
         {
             if (inputElement.validity.valueMissing)
             {
-                errorMessages.push(`${label} is required.`);
+                errorMessages.push(`The ${label} field is required.`);
             }
             else
             {
@@ -64,18 +64,28 @@ $: {
 <style>
 
 .errorMessage {
-    border: 0px;
     padding: 0px;
 }
 
-.errorMessage.active {
-    background-color:  red;
+.errorMessageItem {
+    padding: 0px;
+    color:  rgb(150, 0, 0);
+}
+
+.errorIndicator {
+    color:  rgb(150, 0, 0);
+    display: none;
+}
+
+.errorIndicator.active {
+    display: inline;
 }
 
 </style>
 
 <label for={id}>{label}</label>
 <div class="input-group mb-3">
+    <span class="errorIndicator {errorMessages.length > 0 ? 'active': ''}">*</span>
 {#if prependLabel}
     <div class="input-group-prepend">
         <span class="input-group-text">{prependLabel}</span>
@@ -107,9 +117,9 @@ $: {
     </div>
 {/if}
 </div>
-<div id="{id}ErrorMessage" class="errorMessage {errorMessages.length > 0 ? 'active': ''}">
+<div class="errorMessage">
     {#each errorMessages as errorMessage}
-    <div>
+    <div class="errorMessageItem">
         {errorMessage}
     </div>
     {/each}
