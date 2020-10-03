@@ -49,7 +49,7 @@ async function postPutRequest(path, method, data) {
       })
     }
 
-    const json = tryGetJson(res);
+    const json = await tryGetJson(res);
 
     return { ok: res.ok, response: json }
   }

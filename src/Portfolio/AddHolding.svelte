@@ -9,7 +9,7 @@
     import NumberInput from "../Components/NumberInput.svelte";
     import Button from "../Components/Button.svelte";
     import ServerError from "../Components/ServerError.svelte";
-    import Select from 'svelte-select';
+    import SelectInput from '../Components/SelectInput.svelte';
 
     const portfolioApi = new PortfolioApi();
     const stockApi = new StockApi();
@@ -25,15 +25,12 @@
     let holding = {};
     let errors = [];
 
-    let portfolioInputAttributes = { id: "Portfolio", required: "true" };
-    let stockCodeInputAttributes = { id: "StockCode", required: "true" };
-
     async function getPortfolios()
     {
         return await portfolioApi.getPortfolios();
     }
 
-    const loadOptions = async function(filteredText) {
+    const stockLoadOptions = async function(filteredText) {
         let stockData = (await stockApi.getStocks(filteredText)).data;
         
         let mappedData = window.$.map(stockData, function (v) {
@@ -72,22 +69,12 @@
 
         let stockCode = null;
         let portfolioId = null;
-
-        stockCodeInputAttributes = { id: "StockCode", required: "true" };
-        
+       
         if (stock)
-        {
             stockCode = stock.value;
-            stockCodeInputAttributes = { id: "StockCode" };
-        }
-
-        portfolioInputAttributes = { id: "Portfolio", required: "true" };
 
         if (portfolio)
-        {
             portfolioId = portfolio.value;
-            portfolioInputAttributes = { id: "Portfolio" };
-        }
         
         holding = { stockCode: stockCode, purchaseDate, numberOfShares, purchasePrice, brokerage, portfolioId: portfolioId }    
     }
@@ -119,14 +106,12 @@
 
 <div class="formContainer">
     <form novalidate on:submit|preventDefault={handleSubmit}>
-        <label for="StockCode">Stock Code</label>
-        <Select inputAttributes={stockCodeInputAttributes} containerClasses="input-group mb-3" {loadOptions} placeholder="Asx code or company name" listPlacement="bottom" bind:selectedValue={stock}></Select>
+        <SelectInput id="StockCode" label="Stock Code" loadOptions={stockLoadOptions} placeholder="Asx code or company name" bind:selectedValue={stock} required={true} {errors} />
         <DateInput id="PurchaseDate" label="Purchase Date" bind:value={purchaseDate} required={true} {errors} />
         <NumberInput id="NumberOfShares" label="Number of Shares" bind:value={numberOfShares} required={true} min={1} {errors} />
         <MoneyInput id="PurchasePrice" prependLabel="$" label="Total Purchase Price" bind:value={purchasePrice} appendLabel={pricePerShare} required={true} {errors} />
         <MoneyInput id="Brokerage" prependLabel="$" label="Brokerage" bind:value={brokerage} required={true} {errors} />
-        <label for="Portfolio">Portfolio</label>
-        <Select inputAttributes={portfolioInputAttributes} containerClasses="input-group mb-3" items={portfolios} listPlacement="bottom" bind:selectedValue={portfolio}></Select>
+        <SelectInput id="Portfolio" label="Portfolio" required={true} items={portfolios} bind:selectedValue={portfolio} {errors} />
         <Button>Save</Button>
     </form>
 </div>

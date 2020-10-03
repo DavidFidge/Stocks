@@ -7,7 +7,7 @@
     export let prependLabel = "";
     export let value;
     export let required = false;
-    export let errors = {};
+    export let errors = [];
 
     let errorMessages = [];
 

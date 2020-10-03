@@ -8,7 +8,7 @@
     export let value;
     export let multiline = false;
     export let required = false;
-    export let errors = {};
+    export let errors = [];
 
     let errorMessages = [];
 
@@ -26,7 +26,7 @@
         errorMessages = inputValidation.errorMessages;
     }
 
-$: {
+ $: {
     let inputValidation = {
             id: id,
             label: label,
@@ -38,7 +38,7 @@ $: {
 
     errorMessages = inputValidation.errorMessages;
     errors = [];
-}
+}  
 
 </script>
 

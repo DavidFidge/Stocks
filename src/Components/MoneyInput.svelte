@@ -8,7 +8,7 @@
     export let value;
     export let required = false;
     export let min = "0.00"
-    export let errors = {};
+    export let errors = [];
 
     let errorMessages = [];
 

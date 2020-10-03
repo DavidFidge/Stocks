@@ -1,4 +1,4 @@
-export function updateValidationErrors(inputValidation)
+export function updateValidationErrors(inputValidation, customInputValidation = undefined)
 {
     if (inputValidation.id)
     {
@@ -17,19 +17,25 @@ export function updateValidationErrors(inputValidation)
                 }
                 else
                 {
-                    checkInputValidity(inputValidation);
+                    checkInputValidity(inputValidation, customInputValidation);
                 }
             }
             else
             {                
-                checkInputValidity(inputValidation);
+                checkInputValidity(inputValidation, customInputValidation);
             }
         }
     }
 }
 
-export function checkInputValidity(inputValidation)
+export function checkInputValidity(inputValidation, customInputValidation = undefined)
 {
+    if (customInputValidation)
+    {
+        customInputValidation(inputValidation);
+        return;
+    }
+
     let inputElement = document.getElementById(inputValidation.id);
 
     inputElement.setCustomValidity("");
