@@ -21,7 +21,7 @@
         
         if (response.ok === true)
         {
-            navigate("/portfolio");
+            navigate("/portfolios");
         }
         else
         {

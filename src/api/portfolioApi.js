@@ -24,5 +24,17 @@ export class PortfolioApi
 
     getPortfoliosUrl() {
         return getApiUrl() + `/api/Portfolio/Portfolios`;
-    }    
+    }
+    
+    addDividend(dividend) {
+        return httpPost(`/api/Dividend`, dividend);
+    }
+
+    getDividends() {
+        return httpGet(`/api/Dividend/Dividends`);
+    }
+
+    getDividendsUrl() {
+        return getApiUrl() + `/api/Dividend/Dividends`;
+    }
 }
