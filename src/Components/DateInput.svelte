@@ -7,6 +7,7 @@
     export let prependLabel = "";
     export let value;
     export let required = false;
+    export let disabled = false;
     export let errors = [];
 
     let errorMessages = [];
@@ -74,6 +75,7 @@ $: {
     <input
         {id}
         required={required}
+        disabled={disabled}
         type="date"
         class="form-control"
         bind:value

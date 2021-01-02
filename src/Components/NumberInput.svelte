@@ -7,6 +7,7 @@
     export let prependLabel = "";
     export let value;
     export let required = false;
+    export let disabled = false;
     export let min = "0"
     export let errors = [];
 
@@ -75,6 +76,7 @@ $: {
     <input
         {id}
         required={required}
+        disabled={disabled}
         class="form-control"
         type="number"
         min={min}

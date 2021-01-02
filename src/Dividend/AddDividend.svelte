@@ -123,8 +123,8 @@
         <MoneyInput id="FrankedAmount" prependLabel="$" label="Franked Amount" bind:value={frankedAmount} required={true} {errors} />
         <SelectInput id="Portfolio" label="Portfolio" required={true} items={portfolios} bind:selectedValue={portfolio} {errors} />
         <CheckboxInput id ="IsDividendReinvestmentPlan" label="Dividend Reinvestment Plan" bind:value={isDividendReinvestmentPlan} />
-        <NumberInput id="NumberOfShares" label="Number of Shares Reinvested" bind:value={reinvestmentNumberOfShares} required={isDividendReinvestmentPlan} min={1} {errors} />
-        <MoneyInput id="ReinvestmentPrice" prependLabel="$" label="Total Reinvestment Price" bind:value={reinvestmentPrice} required={isDividendReinvestmentPlan} {errors} />
+        <NumberInput id="NumberOfShares" label="Number of Shares Reinvested" bind:value={reinvestmentNumberOfShares} required={isDividendReinvestmentPlan} min={1} {errors} disabled={!isDividendReinvestmentPlan} />
+        <MoneyInput id="ReinvestmentPrice" prependLabel="$" label="Total Reinvestment Price" bind:value={reinvestmentPrice} required={isDividendReinvestmentPlan} {errors} disabled={!isDividendReinvestmentPlan} />
         <Button>Save</Button>
     </form>
 </div>

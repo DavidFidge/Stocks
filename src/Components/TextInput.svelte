@@ -8,6 +8,7 @@
     export let value;
     export let multiline = false;
     export let required = false;
+    export let disabled = false;
     export let errors = [];
 
     let errorMessages = [];
@@ -76,6 +77,7 @@
     <textarea
         {id}
         required={required}
+        disabled={disabled}
         class="form-control"
         bind:value
         on:change={checkValidity}
@@ -85,6 +87,7 @@
     <input 
         {id} 
         required={required}
+        disabled={disabled}
         class="form-control"
         type="text"
         bind:value 
