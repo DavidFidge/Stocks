@@ -85,7 +85,7 @@
 
         if (response.ok === true)
         {
-            navigate("/portfolio");
+            navigate("/holdings");
         }
         else
         {

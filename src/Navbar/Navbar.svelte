@@ -50,15 +50,21 @@
     
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/portfolio">Portfolio</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/stocks">Stocks</a>
-            </li>            
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>    
+            <li class="nav-item">
+                <a class="nav-link" href="/stocks">Stocks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/portfolios">Portfolios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/holdings">Holdings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/dividends">Dividends</a>
+            </li>
         </ul>
     </div>
 </nav>
