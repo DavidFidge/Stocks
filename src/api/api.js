@@ -18,7 +18,7 @@ export function getApiUrl() {
 
 async function getRequest(path) {
    
-  const res = await fetch(apiUrl + path, {
+  const res = await fetch(apiUrl() + path, {
     method: 'GET',
     headers: {
       'Origin': apiOrigin(),
@@ -30,7 +30,7 @@ async function getRequest(path) {
 }
 
 async function postPutRequest(path, method, data) {
-    const res = await fetch(apiUrl + path, {
+    const res = await fetch(apiUrl() + path, {
       method,
       headers: {
         'Origin': apiOrigin(),
