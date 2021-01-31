@@ -1,3 +1,5 @@
+import { apiUrl, apiOrigin } from './apiUrl.js'
+
 export function httpGet(path) {
   return getRequest(path)
 }
@@ -11,17 +13,15 @@ export function httpPut(path, data) {
 }
 
 export function getApiUrl() {
-  return apiUrl;
+  return apiUrl();
 }
-
-const apiUrl = 'https://localhost:5001'
 
 async function getRequest(path) {
    
   const res = await fetch(apiUrl + path, {
     method: 'GET',
     headers: {
-      'Origin': 'http://localhost:5000',
+      'Origin': apiOrigin(),
       'Content-Type': 'application/json'
     }
   })
@@ -33,7 +33,7 @@ async function postPutRequest(path, method, data) {
     const res = await fetch(apiUrl + path, {
       method,
       headers: {
-        'Origin': 'http://localhost:5000',
+        'Origin': apiOrigin(),
         'Content-Type': 'application/json'
       },
       body: data && JSON.stringify(data)

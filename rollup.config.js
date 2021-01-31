@@ -2,6 +2,7 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
+import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 
 const production = !process.env.ROLLUP_WATCH;
@@ -15,6 +16,16 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		!production && replace({
+			exclude: 'node_modules/**',
+			__API_URL__: 'https://localhost:5001',
+			__API_ORIGIN__: 'http://localhost:5000'
+		}),
+		production && replace({
+			exclude: 'node_modules/**',
+			__API_URL__: 'https://stocksapidfidge.azurewebsites.net',
+			__API_ORIGIN__: 'https://white-water-0fad7331e.azurestaticapps.net'
+		}),
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,
@@ -35,7 +46,7 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
-
+		
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
 		!production && serve(),
