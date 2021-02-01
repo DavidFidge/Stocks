@@ -66,7 +66,7 @@
 
 <label for={id}>{label}</label>
 <div class="input-group mb-3">
-    <span class="errorIndicator {errorMessages.length > 0 ? 'active': ''}">*</span>
+    <span class="errorIndicator {errorMessages.length > 0 ? 'active' : ''}">*</span>
 {#if prependLabel}
     <div class="input-group-prepend">
         <span class="input-group-text">{prependLabel}</span>
