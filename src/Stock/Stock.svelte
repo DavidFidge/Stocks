@@ -1,6 +1,6 @@
 <script>
     import Select from 'svelte-select';
-    import FusionChart from './FusionChart.svelte'
+    import StockChart from './StockChart.svelte'
     import { StockApi } from '../api/stockApi.js'
     import { EndOfDayApi } from '../api/endOfDayApi.js'
 
@@ -43,5 +43,5 @@
         <Select {loadOptions} placeholder="Asx code or company name" listPlacement="bottom" bind:selectedValue={selectedStock}></Select>
     </div>
 
-    <FusionChart endOfDayData={endOfDayData} />
+    <StockChart endOfDayData={endOfDayData} />
 </div>
