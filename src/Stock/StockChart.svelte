@@ -4,8 +4,8 @@
     $:{
         if (endOfDayData && endOfDayData.length > 0)
         {
-            let lows = endOfDayData.map((curVal) => curVal.low);
-            let highs = endOfDayData.map((curVal) => curVal.high);
+            let lows = endOfDayData.map(curVal => curVal.low);
+            let highs = endOfDayData.map(curVal => curVal.high);
             
             let min = Math.min.apply(null, lows);
             let max = Math.max.apply(null, highs);
@@ -69,9 +69,9 @@
                     customizeTooltip: function (arg) {
                         return {
                             text: "Open: $" + arg.openValue + "<br/>" +
-                                    "Close: $" + arg.closeValue + "<br/>" +
-                                    "High: $" + arg.highValue + "<br/>" +
-                                    "Low: $" + arg.lowValue + "<br/>"
+                                "High: $" + arg.highValue + "<br/>" +
+                                "Low: $" + arg.lowValue + "<br/>" +
+                                "Close: $" + arg.closeValue + "<br/>"
                         };
                     }
                 }

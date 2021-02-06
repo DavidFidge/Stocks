@@ -35,10 +35,10 @@
     const stockLoadOptions = async function(filteredText) {
         let stockData = (await stockApi.getStocks(filteredText)).data;
         
-        let mappedData = window.$.map(stockData, function (v) {
+        let mappedData = stockData.map(item => {
             return {
-            value: v.code,
-            label: v.code.concat(' - ', v.companyName)
+            value: item.code,
+            label: item.code.concat(' - ', item.companyName)
             }
         });
 
@@ -48,10 +48,10 @@
     onMount(async _ => {
         const { data } = await getPortfolios();
 
-        portfolios = window.$.map(data, function (v) {
+        portfolios = data.map(item => {
             return {
-            value: v.id,
-            label: v.name
+            value: item.id,
+            label: item.name
             }
         });
     });
