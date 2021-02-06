@@ -79,7 +79,11 @@
         };    
     }
 
+    let isSaving = false;
+
     async function handleSubmit(event) {
+
+        isSaving = true;
 
         let dividendPost = {
             stockCode: dividend.stockCode,
@@ -101,6 +105,7 @@
         else
         {
             errors = response.response.errors;
+            isSaving = false;
         }
     }
 
@@ -125,7 +130,7 @@
         <CheckboxInput id ="IsDividendReinvestmentPlan" label="Dividend Reinvestment Plan" bind:value={isDividendReinvestmentPlan} />
         <NumberInput id="NumberOfShares" label="Number of Shares Reinvested" bind:value={reinvestmentNumberOfShares} required={isDividendReinvestmentPlan} min={1} {errors} />
         <MoneyInput id="ReinvestmentPrice" prependLabel="$" label="Total Reinvestment Price" bind:value={reinvestmentPrice} required={isDividendReinvestmentPlan} {errors} />
-        <Button>Save</Button>
+        <Button showSpinner={isSaving} disabled={isSaving}>Save</Button>
     </form>
 </div>
 <ServerError></ServerError>

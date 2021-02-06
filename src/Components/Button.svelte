@@ -22,15 +22,15 @@
     <slot></slot>
 </a>
 {:else}
-<button on:click class="btn btn-secondary">
+<button 
+    on:click class="btn btn-secondary"
+    disabled={disabled}
+    >
     <slot></slot>
 </button>
 {/if}
 
-<div
-    class="spinner {showSpinner ? 'active' : ''}"
-    disabled={disabled}
-    >
+<div class="spinner {showSpinner ? 'active' : ''}">
     <Spinner
         size="50"
         speed="1000"

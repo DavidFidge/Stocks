@@ -15,7 +15,11 @@
 
     $: { portfolio = { name, holderIdentificationNumber } }
 
+    let isSaving = false;
+
     async function handleSubmit(event) {
+
+        isSaving = true;
 
         let response = await portfolioApi.addPortfolio(portfolio);
         
@@ -26,6 +30,7 @@
         else
         {
             errors = response.response.errors;
+            isSaving = false;
         }
     }
 
@@ -45,7 +50,7 @@
         <TextInput id="Name" label="Name" bind:value={name} {errors} required={true} />
         <TextInput id="HolderIdentificationNumber" label="Holder Identification Number (HIN)" bind:value={holderIdentificationNumber} {errors} />
         <div>
-            <Button>Save</Button>
+            <Button showSpinner={isSaving} disabled={isSaving}>Save</Button>
         </div>
     </form>
 </div>

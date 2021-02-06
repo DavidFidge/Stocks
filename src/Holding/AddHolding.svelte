@@ -79,7 +79,11 @@
         holding = { stockCode: stockCode, purchaseDate, numberOfShares, purchasePrice, brokerage, portfolioId: portfolioId }    
     }
 
+    let isSaving = false;
+
     async function handleSubmit(event) {
+
+        isSaving = true;
 
         let response = await portfolioApi.addHolding(holding);
 
@@ -90,6 +94,7 @@
         else
         {
             errors = response.response.errors;
+            isSaving = false;
         }
     }
 
@@ -112,7 +117,7 @@
         <MoneyInput id="PurchasePrice" prependLabel="$" label="Total Purchase Price" bind:value={purchasePrice} appendLabel={pricePerShare} required={true} {errors} />
         <MoneyInput id="Brokerage" prependLabel="$" label="Brokerage" bind:value={brokerage} required={true} {errors} />
         <SelectInput id="Portfolio" label="Portfolio" required={true} items={portfolios} bind:selectedValue={portfolio} {errors} />
-        <Button>Save</Button>
+        <Button showSpinner={isSaving} disabled={isSaving}>Save</Button>
     </form>
 </div>
 <ServerError></ServerError>
