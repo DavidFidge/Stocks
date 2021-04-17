@@ -117,10 +117,7 @@ namespace StocksApi.Controllers
             }
 
             services.AddAutoMapper(mc => mc.AddProfile(new StockProfile()));
-        }
-
-        protected virtual void ConfigureAdditionalServices(IServiceCollection services)
-        {
+            services.AddSpaStaticFiles(s => s.RootPath = "wwwroot");
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -131,7 +128,8 @@ namespace StocksApi.Controllers
             app.UseHttpsRedirection();
             app.UseSerilogRequestLogging();
 
-            BeforeConfigureUseRouting(app, env);
+            app.UseDefaultFiles();
+            app.UseSpaStaticFiles();
 
             app.UseRouting();
 
@@ -153,10 +151,6 @@ namespace StocksApi.Controllers
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
-        }
-
-        protected virtual void BeforeConfigureUseRouting(IApplicationBuilder app, IWebHostEnvironment env)
-        {
         }
     }
 }

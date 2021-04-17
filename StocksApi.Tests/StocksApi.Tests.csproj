@@ -20,10 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\StocksApi.Controllers\StocksApi.Controllers.csproj" />
     <ProjectReference Include="..\StocksApi.Dto\StocksApi.Dto.csproj" />
     <ProjectReference Include="..\StocksApi.Model\StocksApi.Model.csproj" />
     <ProjectReference Include="..\StocksApi.Tests.Core\StocksApi.Tests.Core.csproj" />
-    <ProjectReference Include="..\StocksApi\StocksApi.csproj" />
   </ItemGroup>
 
 </Project>
