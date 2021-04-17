@@ -30,7 +30,8 @@ namespace StocksApi.Controllers
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        protected IConfiguration Configuration { get; }
+        protected virtual string StaticFilesFolder => "wwwroot";
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -117,7 +118,7 @@ namespace StocksApi.Controllers
             }
 
             services.AddAutoMapper(mc => mc.AddProfile(new StockProfile()));
-            services.AddSpaStaticFiles(s => s.RootPath = "wwwroot");
+            services.AddSpaStaticFiles(s => s.RootPath = StaticFilesFolder);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

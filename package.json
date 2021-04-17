@@ -5,8 +5,7 @@
     "prebuild": "copyfiles --flat src/index/indexcdn/index.html public",
     "build": "rollup -c",
     "predev": "copyfiles --flat src/index/index.html public",
-    "dev": "rollup -c -w",
-    "start": "sirv Stocks/wwwroot --single"
+    "dev": "rollup -c -w"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.1.0",

@@ -35,7 +35,7 @@ export default {
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
-		file: 'Stocks/wwwroot/build/bundle.js'
+		file: 'public/build/bundle.js'
 	},
 	plugins: [
 		!production && replace({
