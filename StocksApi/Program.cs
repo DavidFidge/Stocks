@@ -3,9 +3,6 @@ using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Serilog.Events;
-
-using StocksApi.Core;
 
 namespace StocksApi
 {

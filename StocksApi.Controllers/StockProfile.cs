@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 
-using StocksApi.Controllers;
 using StocksApi.Model;
 
-namespace StocksApi
+namespace StocksApi.Controllers
 {
     public class StockProfile : Profile
     {
