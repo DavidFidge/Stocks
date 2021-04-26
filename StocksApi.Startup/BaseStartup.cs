@@ -6,6 +6,7 @@ using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -126,8 +127,14 @@ namespace StocksApi.Controllers
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            app.UseHttpsRedirection();
             app.UseSerilogRequestLogging();
+
+            var options = new RewriteOptions()
+                .AddRedirectToHttpsPermanent()
+                .AddRewrite(@"^$", "index.html", true)
+                .AddRewrite(@"^(dividend|endofday|holding|portfolio|stocks).*", "index.html", true);
+
+            app.UseRewriter(options);
 
             app.UseDefaultFiles();
             app.UseSpaStaticFiles();
