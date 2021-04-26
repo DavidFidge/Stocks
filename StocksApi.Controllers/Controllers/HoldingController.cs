@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StocksApi.Data;
@@ -14,6 +16,7 @@ namespace StocksApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class HoldingController : BaseController<StocksContext, HoldingDto, SaveHoldingDto, Holding>
     {
         public HoldingController(StocksContext dbContext, IMapper mapper)
