@@ -1,0 +1,20 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    background-color: #eee !important;
+}
+
+a.btn:visited {
+	color: #fff;
+}
+
+nav.navbar {
+    font-size: 24px;
+}
+
+a.navbar-brand {
+    font-size: 30px;
+}
+
+.dx-datagrid-headers {  
+    color: #000000 !important;  
+}
